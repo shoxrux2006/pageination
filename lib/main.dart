@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pageination/pagination/pagination_page.dart';
+import 'package:pageination/pagination/texnomartPage.dart';
 
 void main() {
   runApp(const MyApp());

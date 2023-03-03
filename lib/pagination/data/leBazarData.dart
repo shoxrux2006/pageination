@@ -2,22 +2,12 @@ class LeBazarData {
   LeBazarData({
     required this.id,
     required this.name,
-    this.keywords,
     required this.description,
-    this.skuNumber,
     required this.price,
-    this.storeQuantity,
-    this.quantity,
     required this.company,
     required this.category,
     required this.manufacturer,
     required this.measurement,
-    this.ingredients,
-    this.storageMethods,
-    this.metaTitle,
-    this.headline,
-    this.metaDescription,
-    this.metaKeyword,
     required this.createdDate,
     required this.images,
     required this.parentId,
@@ -35,22 +25,12 @@ class LeBazarData {
 
   int id;
   String name;
-  dynamic keywords;
   String description;
-  dynamic skuNumber;
   int price;
-  dynamic storeQuantity;
-  dynamic quantity;
-  Category company;
+  Company company;
   Category category;
   Category manufacturer;
-  Category measurement;
-  dynamic ingredients;
-  dynamic storageMethods;
-  dynamic metaTitle;
-  dynamic headline;
-  dynamic metaDescription;
-  dynamic metaKeyword;
+  Measurement measurement;
   int createdDate;
   List<Image> images;
   int parentId;
@@ -60,7 +40,7 @@ class LeBazarData {
   List<dynamic> categoryList;
   List<dynamic> ingredientProducts;
   List<dynamic> attributes;
-  Category companyGroup;
+  Company companyGroup;
   bool sale;
   bool campaign;
   bool popular;
@@ -68,22 +48,12 @@ class LeBazarData {
   factory LeBazarData.fromJson(Map<String, dynamic> json) => LeBazarData(
         id: json["id"],
         name: json["name"],
-        keywords: json["keywords"],
         description: json["description"],
-        skuNumber: json["skuNumber"],
         price: json["price"],
-        storeQuantity: json["storeQuantity"],
-        quantity: json["quantity"],
-        company: Category.fromJson(json["company"]),
+        company: Company.fromJson(json["company"]),
         category: Category.fromJson(json["category"]),
         manufacturer: Category.fromJson(json["manufacturer"]),
-        measurement: Category.fromJson(json["measurement"]),
-        ingredients: json["ingredients"],
-        storageMethods: json["storageMethods"],
-        metaTitle: json["metaTitle"],
-        headline: json["headline"],
-        metaDescription: json["metaDescription"],
-        metaKeyword: json["metaKeyword"],
+        measurement: Measurement.fromJson(json["measurement"]),
         createdDate: json["createdDate"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
         parentId: json["parentId"],
@@ -94,7 +64,7 @@ class LeBazarData {
         ingredientProducts:
             List<dynamic>.from(json["ingredientProducts"].map((x) => x)),
         attributes: List<dynamic>.from(json["attributes"].map((x) => x)),
-        companyGroup: Category.fromJson(json["companyGroup"]),
+        companyGroup: Company.fromJson(json["companyGroup"]),
         sale: json["sale"],
         campaign: json["campaign"],
         popular: json["popular"],
@@ -103,22 +73,12 @@ class LeBazarData {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "keywords": keywords,
         "description": description,
-        "skuNumber": skuNumber,
         "price": price,
-        "storeQuantity": storeQuantity,
-        "quantity": quantity,
         "company": company.toJson(),
         "category": category.toJson(),
         "manufacturer": manufacturer.toJson(),
         "measurement": measurement.toJson(),
-        "ingredients": ingredients,
-        "storageMethods": storageMethods,
-        "metaTitle": metaTitle,
-        "headline": headline,
-        "metaDescription": metaDescription,
-        "metaKeyword": metaKeyword,
         "createdDate": createdDate,
         "images": List<dynamic>.from(images.map((x) => x.toJson())),
         "parentId": parentId,
@@ -140,27 +100,35 @@ class Category {
   Category({
     required this.id,
     required this.name,
-    required this.description,
-    required this.code,
   });
 
   int id;
   String name;
-  String description;
-  String code;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
-        name: json["name"] == null ? null : json["name"],
-        description: json["description"] == null ? null : json["description"],
-        code: json["code"] == null ? null : json["code"],
+        name: json["name"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name == null ? null : name,
-        "description": description == null ? null : description,
-        "code": code == null ? null : code,
+        "name": name,
+      };
+}
+
+class Company {
+  Company({
+    required this.id,
+  });
+
+  int id;
+
+  factory Company.fromJson(Map<String, dynamic> json) => Company(
+        id: json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
       };
 }
 
@@ -197,5 +165,33 @@ class Image {
         "largeUrl": largeUrl,
         "mediumUrl": mediumUrl,
         "smallUrl": smallUrl,
+      };
+}
+
+class Measurement {
+  Measurement({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.code,
+  });
+
+  int id;
+  String name;
+  String description;
+  String code;
+
+  factory Measurement.fromJson(Map<String, dynamic> json) => Measurement(
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+        code: json["code"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "code": code,
       };
 }

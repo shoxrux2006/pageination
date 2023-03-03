@@ -1,5 +1,27 @@
 class TexnomartData {
   TexnomartData({
+    required this.items,
+    required this.meta,
+  });
+
+  List<Item> items;
+  Meta meta;
+
+ factory TexnomartData.empty() =>TexnomartData.fromJson({});
+
+  factory TexnomartData.fromJson(Map<String, dynamic> json) => TexnomartData(
+        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        meta: Meta.fromJson(json["_meta"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "items": List<dynamic>.from(items.map((x) => x.toJson())),
+        "_meta": meta.toJson(),
+      };
+}
+
+class Item {
+  Item({
     required this.id,
     required this.name,
     required this.image,
@@ -37,7 +59,7 @@ class TexnomartData {
   String kodProduct;
   dynamic discount;
 
-  factory TexnomartData.fromJson(Map<String, dynamic> json) => TexnomartData(
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
         id: json["id"],
         name: json["name"],
         image: json["image"],
@@ -95,5 +117,33 @@ class Availability {
   Map<String, dynamic> toJson() => {
         "type": type,
         "text": text,
+      };
+}
+
+class Meta {
+  Meta({
+    required this.totalCount,
+    required this.pageCount,
+    required this.currentPage,
+    required this.perPage,
+  });
+
+  int totalCount;
+  int pageCount;
+  int currentPage;
+  int perPage;
+
+  factory Meta.fromJson(Map<String, dynamic> json) => Meta(
+        totalCount: json["totalCount"],
+        pageCount: json["pageCount"],
+        currentPage: json["currentPage"],
+        perPage: json["perPage"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "totalCount": totalCount,
+        "pageCount": pageCount,
+        "currentPage": currentPage,
+        "perPage": perPage,
       };
 }

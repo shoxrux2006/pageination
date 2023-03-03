@@ -18,16 +18,14 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
         offset: 0,
         hasData: true,
       ));
+      final data = await _api.news(
+        offset: state.offset,
+        limit: state.limit,
+      );
+      print("${data.length}");
       try {
         emit(
-          state.copyWith(
-            status: Status.success,
-            products: await _api.news(
-              search: "",
-              offset: state.offset,
-              limit: state.limit,
-            ),
-          ),
+          state.copyWith(status: Status.success, products: data),
         );
       } catch (e) {}
     });
