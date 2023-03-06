@@ -3,7 +3,10 @@ part of 'texnomart_bloc.dart';
 @immutable
 abstract class TexnomartEvent {}
 
-class TexnomartInitEvent extends TexnomartEvent {}
+class TexnomartInitEvent extends TexnomartEvent {
+  final String text;
+  TexnomartInitEvent(this.text);
+}
 
 class TexnomartSearchEvent extends TexnomartEvent {
   final String text;

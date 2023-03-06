@@ -26,7 +26,7 @@ class NewsApi {
 }) async{
 
     final response = await dio.get(
-        "https://backend.texnomart.uz/api/v2/search/search?q=${search}iphone&page=$current",
+        "https://backend.texnomart.uz/api/v2/search/search?q=${search}&page=$current",
     );
     print("ssss ${search} v${response.data}");
     return TexnomartData.fromJson(response.data["data"]);
